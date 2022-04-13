@@ -7,10 +7,15 @@ from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Post
 from blog.forms import CommentForm
 
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
+
 
 logger = logging.getLogger(__name__)
 
 # Create your views here.
+@cache_page(300)
+@vary_on_cookie
 def index(request):
   posts = Post.objects.filter(published_at__lte=timezone.now()).select_related('author')
 
