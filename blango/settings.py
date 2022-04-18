@@ -45,6 +45,7 @@ class Dev(Configuration):
     # Application definition
 
     INSTALLED_APPS = [
+        'blango_auth',
         'django.contrib.admin',
         'django.contrib.auth',
         'django.contrib.contenttypes',
@@ -68,6 +69,7 @@ class Dev(Configuration):
         #'django.middleware.clickjacking.XFrameOptionsMiddleware',
     ]
 
+    AUTH_USER_MODEL = "blango_auth.User"
     ROOT_URLCONF = 'blango.urls'
 
     TEMPLATES = [
