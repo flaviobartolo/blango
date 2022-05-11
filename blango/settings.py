@@ -63,7 +63,8 @@ class Dev(Configuration):
         'allauth.socialaccount.providers.google',
         'rest_framework',
         'rest_framework.authtoken',
-        'drf_yasg'
+        'drf_yasg',
+        'django_filters'
     ]
 
     MIDDLEWARE = [
@@ -219,6 +220,12 @@ class Dev(Configuration):
             'user_sustained': '5000/day',
             'user_burst': '100/minute',
         },
+        'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+        'PAGE_SIZE': 100,
+        'DEFAULT_FILTER_BACKENDS': [
+            'django_filters.rest_framework.DjangoFilterBackend',
+            'rest_framework.filters.OrderingFilter'
+        ],
     }
 
     SWAGGER_SETTINGS = {
@@ -227,6 +234,7 @@ class Dev(Configuration):
             'Basic': {'type': 'basic'},
         }
     }
+
 
 class Prod(Dev):
   DEBUG = False

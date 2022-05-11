@@ -7,6 +7,10 @@ from django.contrib.contenttypes.models import ContentType
 # Create your models here.
 
 class Tag(models.Model):
+
+  class Meta:
+      ordering = ['value']
+
   value = models.TextField(max_length=100, unique=True)
 
   def __str__(self):
