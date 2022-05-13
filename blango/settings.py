@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+from datetime import timedelta
+
 import dj_database_url
 
 from pathlib import Path
@@ -226,6 +228,12 @@ class Dev(Configuration):
             'django_filters.rest_framework.DjangoFilterBackend',
             'rest_framework.filters.OrderingFilter'
         ],
+        'DEFAULT_AUTHENTICATION_CLASSES': [
+            'rest_framework.authentication.BasicAuthentication',
+            'rest_framework.authentication.SessionAuthentication',
+            'rest_framework.authentication.TokenAuthentication',
+            'rest_framework_simplejwt.authentication.JWTAuthentication'
+        ],
     }
 
     SWAGGER_SETTINGS = {
@@ -233,6 +241,11 @@ class Dev(Configuration):
             'Token': {'type': 'apiKey', 'name': 'Authorization', 'in': 'header'},
             'Basic': {'type': 'basic'},
         }
+    }
+    
+    SIMPLE_JWT = {
+        'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+        'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
     }
 
 
