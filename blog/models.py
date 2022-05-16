@@ -4,6 +4,8 @@ from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 
+from versatileimagefield.fields import VersatileImageField, PPOIField
+
 # Create your models here.
 
 class Tag(models.Model):
@@ -41,7 +43,11 @@ class Post(models.Model):
   content = models.TextField()
   tags = models.ManyToManyField(Tag, related_name='posts')
   comments = GenericRelation(Comment) # class model to be passed as GenericRelation argument must be defined above this class (on this case Comment class must be defined above Post class) or else it give an error
-
+  hero_image = VersatileImageField(
+    upload_to='hero_images', ppoi_field='ppoi', null=True, blank=True
+  )
+  ppoi = PPOIField(null=True, blank=True)
+  
   def __str__(self):
     return self.title
 

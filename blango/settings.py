@@ -66,7 +66,8 @@ class Dev(Configuration):
         'rest_framework',
         'rest_framework.authtoken',
         'drf_yasg',
-        'django_filters'
+        'django_filters',
+        'versatileimagefield'
     ]
 
     MIDDLEWARE = [
@@ -152,8 +153,10 @@ class Dev(Configuration):
     # Default primary key field type
     # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-    DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+    MEDIA_ROOT = BASE_DIR / 'media'
+    MEDIA_URL = '/media/'
 
+    DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
     # Crispy custom settings
     CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -247,6 +250,8 @@ class Dev(Configuration):
         'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
         'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
     }
+
+
 
 
 class Prod(Dev):
