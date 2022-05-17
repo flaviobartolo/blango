@@ -1,5 +1,6 @@
 import logging
 
+from django.urls import reverse
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -50,7 +51,11 @@ def post_detail(request, slug):
 
 
 def post_table(request):
-  return render(request, 'blog/post-table.html')
+  return render(
+    request, 
+    'blog/post-table.html',
+    {'post_list_url': reverse('post-list')}
+  )
 
 
 # Get the ip that gets connected to codio so it can be used on Django Debug Toolbar
